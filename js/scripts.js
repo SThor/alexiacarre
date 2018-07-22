@@ -6,8 +6,9 @@ var canvas = {
   padding:50,
   settings:{
     iterations:300,
-    angle:137.5*Math.PI/180,
-    goldenRatio:1.61803398875
+    angle:(137.5*Math.PI/180)*1.0,
+    goldenRatio:1.61803398875,
+    radius:10
   },
   resizeCanvas : function() {
     //canvas.width = window.innerWidth;
@@ -38,14 +39,14 @@ var canvas = {
     var i,j;
     for(i=0;i<canvas.settings.iterations;i++){
       canvas.ctx.beginPath();
-      canvas.ctx.arc(0,Math.sqrt(i)*5,2,0,2*Math.PI);
+      canvas.ctx.arc(0,Math.sqrt(i)*canvas.settings.radius,canvas.settings.radius/5,0,2*Math.PI);
       canvas.ctx.fillStyle="black";
-      canvas.ctx.fill();
+      canvas.ctx.stroke();
       canvas.ctx.rotate(canvas.settings.angle);
       //canvas.ctx.lineWidth = Math.log(i)
     }
     canvas.ctx.beginPath();
-    canvas.ctx.arc(0,0,Math.log2(i*i)+i*canvas.settings.goldenRatio,0,2*Math.PI);
+    canvas.ctx.arc(0,0,Math.sqrt(i)*canvas.settings.radius+canvas.settings.radius,0,2*Math.PI);
     canvas.ctx.stroke();
     canvas.ctx.rotate(canvas.settings.angle);
     
