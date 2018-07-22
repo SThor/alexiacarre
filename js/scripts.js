@@ -5,9 +5,9 @@ var canvas = {
   color_main:"black",
   padding:50,
   settings:{
-    cellsInWidth : 4,
-    itInCell : 100,
-    offsetInIt : 0.05
+    iterations:300,
+    angle:137.5*Math.PI/180,
+    goldenRatio:1.61803398875
   },
   resizeCanvas : function() {
     //canvas.width = window.innerWidth;
@@ -34,29 +34,21 @@ var canvas = {
     canvas.ctx.translate(0.5+canvas.padding,0.5+canvas.padding);
     //canvas.ctx.strokeRect(0,0,canvas.canvas.width-1-2*canvas.padding,canvas.canvas.height-1-2*canvas.padding);
     
-    var cellLenght = (canvas.canvas.width-2*canvas.padding-1)/canvas.settings.cellsInWidth;
+    canvas.ctx.setTransform(1,0,0,1,canvas.canvas.width/2,canvas.canvas.height/2);
     var i,j;
-    for(i=0;i<canvas.settings.cellsInWidth;i++){
-      for(j=0;j<canvas.settings.cellsInWidth;j++){
-        canvas.ctx.setTransform(1,0,0,1,(i*cellLenght)+cellLenght/2+0.5+canvas.padding,(j*cellLenght)+cellLenght/2+0.5+canvas.padding);
-        canvas.drawCell(i,j,cellLenght);
-      }
+    for(i=0;i<canvas.settings.iterations;i++){
+      canvas.ctx.beginPath();
+      canvas.ctx.arc(0,Math.sqrt(i)*5,2,0,2*Math.PI);
+      canvas.ctx.fillStyle="black";
+      canvas.ctx.fill();
+      canvas.ctx.rotate(canvas.settings.angle);
+      //canvas.ctx.lineWidth = Math.log(i)
     }
-  },
-  
-  drawCell: function(i,j,cellLenght){
-    //canvas.ctx.strokeRect(0-cellLenght/2+canvas.padding,0-cellLenght/2+canvas.padding,cellLenght,cellLenght);
-    var k;
-    var angle = Math.atan(canvas.settings.offsetInIt/(1-canvas.settings.offsetInIt));
-    var scale = canvas.settings.offsetInIt/Math.sin(angle);
-    if((i+j)%2===0){
-      angle = -angle;
-    }
-    for(k=0;k<canvas.settings.itInCell;k++){
-      canvas.ctx.strokeRect(0-cellLenght/2,0-cellLenght/2,cellLenght,cellLenght);
-      canvas.ctx.rotate(angle);
-      canvas.ctx.scale(scale,scale);
-    }
+    canvas.ctx.beginPath();
+    canvas.ctx.arc(0,0,Math.log2(i*i)+i*canvas.settings.goldenRatio,0,2*Math.PI);
+    canvas.ctx.stroke();
+    canvas.ctx.rotate(canvas.settings.angle);
+    
   }
 };
 
