@@ -73,15 +73,15 @@ var canvas = {
     canvas.ctx.strokeStyle = "rgba(0, 0, 0, 0.1)";
     var i,j;
     for(i=0;i<canvas.settings.iterations*10;i++){
-      //canvas.ctx.strokeStyle = "rgba(0, 0, 0, "+(0.5-i*0.0002)+")";
-      canvas.ctx.strokeStyle = canvas.lerp(canvas.palette[4],canvas.palette[0],(Math.sqrt(i)*canvas.settings.radius*1.5)/(Math.sqrt(canvas.settings.iterations*10)*canvas.settings.radius*1.5))
+      canvas.ctx.strokeStyle = "rgba(0, 0, 0, "+(0.5-i*0.0002)+")";
+      //canvas.ctx.strokeStyle = canvas.lerp(canvas.palette[4],canvas.palette[0],(Math.sqrt(i)*canvas.settings.radius*1.5)/(Math.sqrt(canvas.settings.iterations*10)*canvas.settings.radius*1.5))
       canvas.ctx.beginPath();
       canvas.ctx.arc(0,Math.sqrt(i)*canvas.settings.radius*1.5,canvas.settings.radius,0,2*Math.PI);
       canvas.ctx.stroke();
       canvas.ctx.rotate(canvas.settings.angle);
     }
     for(i=0;i<canvas.settings.iterations;i++){
-    canvas.ctx.strokeStyle = "rgba(201, 0, 0, "+10/i+")";
+    canvas.ctx.strokeStyle = "rgba(0, 0, 0, "+10/i+")";
       canvas.ctx.beginPath();
       canvas.ctx.arc(0,Math.sqrt(i)*canvas.settings.radius*5,canvas.settings.radius,0,2*Math.PI);
       canvas.ctx.fillStyle="black";
@@ -94,10 +94,10 @@ var canvas = {
     canvas.ctx.rotate(canvas.settings.angle);
     canvas.ctx.strokeStyle = "rgba(0, 0, 0, 0.1)";*/
     for(i=0;i<canvas.settings.iterations/3;i++){
-      //canvas.ctx.strokeStyle = "rgba(0, 0, 0, "+0.002*i+")";
+      canvas.ctx.strokeStyle = "rgba(0, 0, 0, "+0.002*i+")";
       //canvas.ctx.strokeStyle = canvas.getRainbowColor(i)
-      var color = canvas.hexToRGB(canvas.palette[i%5])
-      canvas.ctx.strokeStyle = "rgba("+color.r+","+color.g+","+color.b+","+0.2+")";
+      //var color = canvas.hexToRGB(canvas.palette[i%5])
+      //canvas.ctx.strokeStyle = "rgba("+color.r+","+color.g+","+color.b+","+0.2+")";
       canvas.ctx.beginPath();
       canvas.ctx.arc(0,Math.sqrt(i)*canvas.settings.radius,canvas.settings.radius*i,0,2*Math.PI);
       canvas.ctx.fillStyle="black";
